@@ -6,6 +6,12 @@ import { useTypingEffect } from "@/hooks/useTypingEffect";
 import { cn } from "@/lib/cn";
 import type { Profile } from "@/types/portfolio";
 
+const FALLBACK_LINKS = {
+  github: "https://github.com/zedcodex1314-ops",
+  linkedin:
+    "https://www.linkedin.com/in/carlos-vladimir-mamani-yangali-745739288/",
+};
+
 type Props = {
   profile: Profile;
 };
@@ -17,8 +23,8 @@ export function HeroTyping({ profile }: Props) {
   });
 
   const socials = [
-    { label: "GitHub", href: profile.githubUrl },
-    { label: "LinkedIn", href: profile.linkedinUrl },
+    { label: "GitHub", href: profile.githubUrl || FALLBACK_LINKS.github },
+    { label: "LinkedIn", href: profile.linkedinUrl || FALLBACK_LINKS.linkedin },
     { label: "Website", href: profile.websiteUrl },
   ].filter((s) => Boolean(s.href));
 
@@ -64,7 +70,7 @@ export function HeroTyping({ profile }: Props) {
             href={s.href}
             target="_blank"
             rel="noreferrer"
-            className="hover:text-white hover:drop-shadow-[0_0_10px_rgba(123,47,255,0.45)] transition-colors"
+            className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-zinc-200 transition-all hover:border-cyan-300/30 hover:text-white hover:shadow-[0_0_20px_rgba(0,212,255,0.18)]"
           >
             {s.label}
           </a>
